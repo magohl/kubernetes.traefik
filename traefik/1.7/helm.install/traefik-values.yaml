@@ -1,0 +1,33 @@
+dashboard:
+  enabled: true
+  domain: traefik.k8s.molnet.app
+  ingress:
+    annotations:
+      kubernetes.io/ingress.class: traefik
+  auth:
+    basic:
+      admin: $2y$XXXXXXXXXXX
+
+metrics:
+  prometheus:
+    enabled: true
+
+rbac:
+  enabled: true
+
+ssl:
+  enabled: true
+  enforced: false
+
+acme:
+  onHostRule: true
+  enabled: true
+  staging: false
+  logging: true
+  email: magnus.ohlsson@gmail.com
+  challengeType: dns-01
+  dnsProvider:
+    name: dnsimple
+    dnsimple:
+      DNSIMPLE_OAUTH_TOKEN: xxxxxxxx
+      DNSIMPLE_BASE_URL: https://api.dnsimple.com

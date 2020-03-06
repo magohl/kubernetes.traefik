@@ -1,0 +1,1 @@
+helm install traefik stable/traefik --namespace traefik --values traefik-values.yaml
