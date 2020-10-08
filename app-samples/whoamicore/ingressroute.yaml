@@ -1,0 +1,30 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: whoami-ingressroute
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`whoami.localhost`)
+      kind: Rule
+      services:
+        - name: whoami-service
+          port: 80
+      middlewares:
+      - name: testheader
+        namespace: default
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: testheader
+spec:
+  headers:
+    customRequestHeaders:
+      X-Script-Name: "test"
+    customResponseHeaders:
+      X-Custom-Response-Header: "value"
