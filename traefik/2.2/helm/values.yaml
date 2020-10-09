@@ -1,0 +1,19 @@
+# values.yaml
+additionalArguments:
+    - --certificatesresolvers.le.acme.email=magnus.ohlsson@gmail.com
+    - --certificatesresolvers.le.acme.storage=/data/acme.json
+    #- --certificatesresolvers.le.acme.tlschallenge=true
+    - --certificatesResolvers.le.acme.dnschallenge=true
+    - --certificatesResolvers.le.acme.dnschallenge.provider=dnsimple
+    #Remove this when test is done
+    - --certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+persistence:
+  enabled: true
+  path: /data
+
+env:
+  - name: DNSIMPLE_OAUTH_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: dnsimpletest
+        key: dns-token

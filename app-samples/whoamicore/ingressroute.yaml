@@ -7,8 +7,9 @@ metadata:
 spec:
   entryPoints:
     - web
+    - websecure
   routes:
-    - match: Host(`whoami.localhost`)
+    - match: Host(`whoamicore.local.molnet.app`)
       kind: Rule
       services:
         - name: whoami-service
@@ -16,7 +17,8 @@ spec:
       middlewares:
       - name: testheader
         namespace: default
-
+  tls:
+    certResolver: le
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
